@@ -1,5 +1,9 @@
 //DROP DATABASE stinger_info;
 
+//INSERT INTO films (film_id, film_name, film_year, film_director, film_country, pcs_info) VALUES ('123456', 'Deadpool', '2016', 'Tim Miller', 'USA', 'YES');
+//INSERT INTO films (film_id, film_name, film_year, film_director, film_country, pcs_info) VALUES ('234567', 'The Matrix', '1999', 'Lana Wachowski, Lilly Wachowski', 'USA', 'NO');
+
+
 CREATE DATABASE stinger_info;
 
 USE stinger_info;
@@ -10,7 +14,7 @@ CREATE TABLE films
 	film_year INT(4) NOT NULL,
 	film_director VARCHAR(70) NOT NULL,
 	film_country VARCHAR(70) NOT NULL,
-	pcs_info ENUM('YES', 'NO', 'UNKNOWN'),
+	pcs_info ENUM('YES', 'NO', 'UNKNOWN') NOT NULL DEFAULT 'UNKNOWN',
 	PRIMARY KEY (film_id));
 
 CREATE TABLE users
@@ -18,7 +22,7 @@ CREATE TABLE users
 	user_role ENUM('ADMIN', 'USER'),
 	PRIMARY KEY (user_id));
 	
-CREATE TABLE voutes
+CREATE TABLE votes
 	(film_id VARCHAR(255) NOT NULL,
 	user_id VARCHAR(255) NOT NULL,
 	vote_changed DATE NOT NULL,
