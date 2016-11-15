@@ -1,4 +1,4 @@
-package org.dtmhapcs.model.embeddedIds;
+package org.dtmhapcs.model.embedded;
 
 import java.io.Serializable;
 

@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.dtmhapcs.service.interfaces.EnumValidator;
 
 public class EnumValidatorImpl implements ConstraintValidator<EnumValidator, String>{
-    String [] acceptableValues;
+    private String [] acceptableValues;
 
     @Override
     public void initialize(EnumValidator constraintAnnotation) {

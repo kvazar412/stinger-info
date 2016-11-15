@@ -2,6 +2,10 @@ package org.dtmhapcs.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,32 +38,32 @@ public class User implements Serializable {
     
     @Override
     public String toString() {
-        return "User [userId=" + userId + ", userRole=" + userRole + "]";
-    }   
+        return new ToStringBuilder(this)
+                .append("userId", userId)
+                .append("userRole", userRole)
+                .toString();
+    }  
     
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + userId.hashCode();
-        result = prime * result + userRole.hashCode();
-        return result;
+        return new HashCodeBuilder()
+                .append(userId)
+                .append(userRole)
+                .toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        User other = (User) obj;
-        if (!userId.equals(other.userId))
-            return false;
-        if (userRole != other.userRole)
-            return false;
-        return true;
+        if (obj == null) return false;
+        if (obj == this) return true;       
+        if (obj.getClass() != getClass()) {
+            return false;            
+        }
+        User rhs = (User) obj;
+        return new EqualsBuilder()
+                .append(userId, rhs.userId)
+                .append(userRole, rhs.userRole)
+                .isEquals();
     }
 
     public String getUserId() {

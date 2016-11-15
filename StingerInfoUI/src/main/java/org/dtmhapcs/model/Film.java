@@ -2,6 +2,10 @@ package org.dtmhapcs.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -36,7 +40,6 @@ public class Film implements Serializable {
     @NotNull
     @Digits(integer = 4, fraction = 0, message = "Film year must have only 4 digits")
     @Min(value = 1895, message = "Film year must be more than 1895")
-
     private int filmYear;
 
     @Column(name = "FILM_DIRECTOR")
@@ -67,47 +70,46 @@ public class Film implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Film [filmId=" + filmId + ", filmName=" + filmName + "," + "filmYear=" + filmYear + ", filmDirector=" + filmDirector + "," + "filmCountry="
-                + filmCountry + ", pcsInfo=" + pcsInfo + "]";
-    }
-
-    @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + filmCountry.hashCode();
-        result = prime * result + filmDirector.hashCode();
-        result = prime * result + filmId.hashCode();
-        result = prime * result + filmName.hashCode();
-        result = prime * result + filmYear;
-        result = prime * result + pcsInfo.hashCode();
-        return result;
+        return new HashCodeBuilder()
+                .append(filmId)
+                .append(filmName)
+                .append(filmYear)
+                .append(filmDirector)
+                .append(filmCountry)
+                .append(pcsInfo)
+                .toHashCode();
     }
-
+    
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
+    public boolean equals (Object obj){
+        if (obj == null) return false;
+        if (obj == this) return true;       
+        if (obj.getClass() != getClass()) {
             return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Film other = (Film) obj;
-        if (!filmCountry.equals(other.filmCountry))
-            return false;
-        if (!filmDirector.equals(other.filmDirector))
-            return false;
-        if (!filmId.equals(other.filmId))
-            return false;
-        if (!filmName.equals(other.filmName))
-            return false;
-        if (filmYear != other.filmYear)
-            return false;
-        if (pcsInfo != other.pcsInfo)
-            return false;
-        return true;
+        }
+        Film rhs = (Film) obj;        
+        return new EqualsBuilder()
+                .append(filmId, rhs.filmId)
+                .append(filmName, rhs.filmName)
+                .append(filmYear, rhs.filmYear)
+                .append(filmDirector, rhs.filmDirector)
+                .append(filmCountry, rhs.filmCountry)
+                .append(pcsInfo, rhs.pcsInfo)
+                .isEquals();                
     }
+    
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("filmId", filmId)
+                .append("filmName", filmName)
+                .append("filmYear", filmYear)
+                .append("filmDirector", filmDirector)
+                .append("filmCountry", filmCountry)
+                .append("pcsInfo", pcsInfo)
+                .toString();
+    }    
 
     public String getFilmId() {
         return filmId;

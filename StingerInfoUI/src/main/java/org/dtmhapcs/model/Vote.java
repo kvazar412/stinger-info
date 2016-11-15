@@ -14,7 +14,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.dtmhapcs.model.embeddedIds.VoteId;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.dtmhapcs.model.embedded.VoteId;
 import org.dtmhapcs.model.enums.VoteValue;
 
 @Entity
@@ -56,39 +59,41 @@ public class Vote implements Serializable {
 
     @Override
     public String toString() {
-        return "Vote [film=" + film + ", user=" + user
-                + ", voteChanged=" + voteChanged + ", voteCalue=" + voteValue + "]";
+        return new ToStringBuilder(this)
+                .append("voteId", voteId)
+                .append("film", film)
+                .append("user", user)
+                .append("voteChanged", voteChanged)
+                .append("voteValue", voteValue)
+                .toString();
     }    
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + film.hashCode();
-        result = prime * result + user.hashCode();
-        result = prime * result + voteValue.hashCode();
-        result = prime * result + voteChanged.hashCode();
-        return result;
+        return new HashCodeBuilder()
+                .append(voteId)
+                .append(film)
+                .append(user)
+                .append(voteChanged)
+                .append(voteValue)
+                .toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
+        if (obj == null) return false;
+        if (obj == this) return true;       
+        if (obj.getClass() != getClass()) {
             return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Vote other = (Vote) obj;
-        if (!film.equals(other.film))
-            return false;
-        if (!user.equals(other.user))
-            return false;
-        if (voteValue != other.voteValue)
-            return false;
-        if (!voteChanged.equals(other.voteChanged))
-            return false;
-        return true;
+        }
+        Vote rhs = (Vote) obj;        
+        return new EqualsBuilder()
+                .append(voteId, rhs.voteId)
+                .append(film, rhs.film)
+                .append(user, rhs.user)
+                .append(voteChanged, rhs.voteChanged)
+                .append(voteValue, rhs.voteValue)
+                .isEquals();
     }
 
     public VoteId getVoteId() {
