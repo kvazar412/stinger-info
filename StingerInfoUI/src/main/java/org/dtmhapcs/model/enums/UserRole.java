@@ -1,4 +1,4 @@
-package org.dtmhapcs.model.beans.enums;
+package org.dtmhapcs.model.enums;
 
 public enum UserRole {
     ADMIN, USER

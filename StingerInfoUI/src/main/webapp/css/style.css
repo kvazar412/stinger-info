@@ -27,6 +27,13 @@ body {
     background-color: #BEB7B7;
 }
 
+div.main-menu-href {
+    text-align: left;
+    padding: 20px 20px;
+    color: #8C9FE8;
+    font-style: italic;
+}
+
 .title h1 {
     font-size: 24px;
     font-weight: normal;
@@ -109,44 +116,79 @@ h3 {
 }
 
 .film-list {
-    width: 600px;
+    width: 800px;
     margin: 20px auto;
 }
 
-.film-list table {
-    width: 98%;
-}
-
-.film-list table tr:first-child {
+.title-row tr:first-child {
     background: #FDC891;
+    text-align: center;
 }
 
-.film-list table tr:nth-child(2n) {
+.four-column-table tr:nth-child(2n) {
     background: #E6E6E6;
 }
 
-.film-list img {
-    height: 60px;
+.four-column-table tr td:nth-child(1), .four-column-table tr td:nth-child(3) {
+    width: 35%; 
 }
 
-.film-list table a {
-    color: black;
+.four-column-table tr td:nth-child(2) {
+    width: 10%;
 }
 
-/* User Page styles */
-.film-list tr td:nth-child(7), .film-list tr td:nth-child(8) {
+.four-column-table tr td:nth-child(4) {
+    width: 20%;
+}
+
+/* *************** User Page styles *************** */
+.input-row tr:first-child {
+    background: #E6E6E6;
+}
+
+.film-list input {
+	font-size: 14px;
+    background: #E6E6E6;
+    width: 100%;
+}
+
+.eight-column-table tr td:nth-child(1) {
+    width: 12%; 
+}
+
+.eight-column-table tr td:nth-child(2), .eight-column-table tr td:nth-child(4),
+        .eight-column-table tr td:nth-child(5) {
+    width: 18%;
+}
+
+.eight-column-table tr td:nth-child(3) {
+    width: 6%;
+}
+
+.eight-column-table tr td:nth-child(6) {
+    width: 12%;
+}
+
+.eight-column-table tr td:nth-child(7), .eight-column-table tr td:nth-child(8) {
     background-color: #FFF;
+    width: 8%;
 }
 
-.film-list .edit-save-btn {
+.eight-column-table tr td:nth-child(7) input,
+        .eight-column-table tr td:nth-child(8) input {
+    background-color: transparent;
+}
+
+.btn-view {
+	display: block;
     font-style: italic;
     color: #8C9FE8;
-    height: 25px;
+    font-size: 14px;
     padding: 5px 5px;
     background-color: transparent;
     border: none;
 }
 
-.film-list .edit-save-btn:hover {
+.btn-view:hover {
     text-decoration: underline;
 }

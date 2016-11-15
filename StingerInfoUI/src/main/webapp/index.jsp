@@ -1,9 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
 <html>
+<head>
+<title>Welcome Page</title>      
+<link href="<c:url value="/css/style.css"/>" type="text/css"
+    rel="stylesheet">
+</head>
 <body>
-    <h2>First Page Spring MVC</h2>
-    <h4><a href="hello.htm">Click Here</a></h4>
+    <h2>Welcome!</h2>  
+    <h4><a href="<c:url value="/searchPage"/>">Let's start!</a></h4>
+<!--     <h4><a href="filmList">Let's start!</a></h4> -->
 </body>
 </html>

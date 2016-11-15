@@ -1,22 +1,25 @@
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page session="false"%>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>First Page</title>
-<link href="../css/style.css" rel="stylesheet" type="text/css"
-    media="all" />
+<head>
+    <title>DTMHAPCS?</title>
+    <link href="<c:url value="/css/style.css"/>" type="text/css"
+        rel="stylesheet">
 </head>
 <body>
-
     <form>
         <div class="header">
-            <a href="userPage.html">UserName</a> <input class="exitButton"
-                name="pressedButton" type="submit" value="X" />
+            <a href="<c:url value="/filmList"/>">UserName</a>
+            <!-- Link currently doesn't work -->
+            <input class="exitButton" name="pressedButton"
+                type="submit" value="X" />
         </div>
 
         <div class="title">
             <h1>Find out does this film have post credit scenes!</h1>
-            <input name="filmName" type="text" maxlength="170" size="50"
+            <input name="filmName" type="text" maxlength="255" size="50"
                 placeholder="Enter film name here, for example: Deadpool" /> <input
                 name="pressedButton" type="submit" value="search" />
         </div>
@@ -34,31 +37,33 @@
 
         <div class="vote-yes">
             <input class="answer yes" name="pressedButton" type="submit"
-                value="YES" /> <span>75 votes</span>
+                value="YES" />
+            <span># votes</span>
         </div>
         <div class="vote-no">
             <input class="answer no" name="pressedButton" type="submit"
-                value="NO" /> <span>4 votes</span>
+                value="NO" />
+            <span># votes</span>
         </div>
-
+        
         <h3>Thanks for your vote, UserName!</h3>
 
-        <div class="film-list">
-            <table>
+        <div>
+            <table class="film-list four-column-table title-row">
                 <tr>
-                    <td>Film name</td>
+                    <td>Title</td>
                     <td>Year</td>
                     <td>Director</td>
                     <td>Country</td>
                 </tr>
                 <tr>
-                    <td><a href="#">Deadpool</a></td>
+                    <td>Deadpool</td>
                     <td>2016</td>
                     <td>Tim Miller</td>
                     <td>USA</td>
                 </tr>
                 <tr>
-                    <td><a href="#">The Matrix</a></td>
+                    <td>The Matrix</td>
                     <td>1999</td>
                     <td>Lana Wachowski, Lilly Wachowski</td>
                     <td>USA</td>
