@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
     http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <display-name>Does This Movie Has A Post Credit Scenes?</display-name>
+    <display-name>DTMHAPCS?</display-name>
 
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>
