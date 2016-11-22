@@ -1,0 +1,83 @@
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"    
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd        
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+ 
+    <context:component-scan base-package="org.dtmhapcs" />           
+    
+    <mvc:annotation-driven/>    
+   
+    <mvc:default-servlet-handler/>
+    
+    <bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>       
+        <property name="suffix" value=".jsp"/>
+    </bean>
+     
+    <!-- DataSource -->
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/stinger_info" />
+        <property name="username" value="root" />
+        
+        <property name="password" value="root" />
+        <property name="initialSize" value="5" />
+        <property name="maxActive" value="10" />
+        <property name="maxIdle" value="5" />
+        <property name="minIdle" value="2" />
+     </bean> 
+        
+    <!-- Hibernate SessionFactory -->    
+    <bean id="hibernate5AnnotatedSessionFactory"
+            class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+            <property name="packagesToScan" value="org.dtmhapcs.model" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+        
+    <!-- Transaction -->
+    <bean id="transactionManager"
+            class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <!-- MovieDao, UserDao, VoteDao and DbService beans -->
+    <bean id="movieDao" class="org.dtmhapcs.model.services.db.dao.MovieDaoImpl">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+    <bean id="userDao" class="org.dtmhapcs.model.services.db.dao.UserDaoImpl">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+    <bean id="voteDao" class="org.dtmhapcs.model.services.db.dao.VoteDaoImpl">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+    <bean id="dbService" class="org.dtmhapcs.model.services.db.DbServiceImpl">
+        <property name="movieDao" ref="movieDao"/>
+        <property name="userDao" ref="userDao"/>
+        <property name="voteDao" ref="voteDao"/>
+    </bean> 
+    
+<!--     Not working, in progress -->
+<!--     <bean id="messageSource" -->
+<!--             class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  -->
+<!--         <property name="basename" value="/WEB-INF/resources/messages"/> -->
+<!--     </bean> -->    
+</beans>
