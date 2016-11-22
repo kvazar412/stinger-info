@@ -1,9 +1,9 @@
-package org.dtmhapcs.service;
+package org.dtmhapcs.model.services.validators;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.dtmhapcs.service.interfaces.EnumValidator;
+import org.dtmhapcs.model.services.validators.interfaces.EnumValidator;
 
 public class EnumValidatorImpl implements ConstraintValidator<EnumValidator, String>{
     private String [] acceptableValues;

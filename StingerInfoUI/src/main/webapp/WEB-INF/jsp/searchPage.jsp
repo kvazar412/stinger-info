@@ -10,17 +10,12 @@
 </head>
 <body>
     <form>
-        <div class="header">
-            <a href="<c:url value="/filmList"/>">UserName</a>
-            <!-- Link currently doesn't work -->
-            <input class="exitButton" name="pressedButton"
-                type="submit" value="X" />
-        </div>
+    <jsp:include page="header.jsp" />
 
         <div class="title">
-            <h1>Find out does this film have post credit scenes!</h1>
-            <input name="filmName" type="text" maxlength="255" size="50"
-                placeholder="Enter film name here, for example: Deadpool" /> <input
+            <h1>Find out does this movie have post credit scenes!</h1>
+            <input name="movieTitle" type="text" maxlength="255" size="50"
+                placeholder="Enter movie name here, for example: Deadpool" /> <input
                 name="pressedButton" type="submit" value="search" />
         </div>
 
@@ -32,7 +27,7 @@
             <p>NO</p>
         </div>
 
-        <h2>Let's make a site together! Does this film have post credit
+        <h2>Let's make a site together! Does this movie have post credit
             scenes?</h2>
 
         <div class="vote-yes">
@@ -49,7 +44,7 @@
         <h3>Thanks for your vote, UserName!</h3>
 
         <div>
-            <table class="film-list four-column-table title-row">
+            <table class="info-list four-column-table title-row second-row">
                 <tr>
                     <td>Title</td>
                     <td>Year</td>

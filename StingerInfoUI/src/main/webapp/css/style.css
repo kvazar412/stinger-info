@@ -39,7 +39,7 @@ div.main-menu-href {
     font-weight: normal;
 }
 
-.title input[name="filmName"] {
+.title input[name="movieName"] {
     height: 20px;
     padding: 6px 12px;
     color: #555;
@@ -115,7 +115,7 @@ h3 {
     color: #A3A3A3;
 }
 
-.film-list {
+.info-list {
     width: 800px;
     margin: 20px auto;
 }
@@ -125,7 +125,7 @@ h3 {
     text-align: center;
 }
 
-.four-column-table tr:nth-child(2n) {
+.second-row tr:nth-child(2n) {
     background: #E6E6E6;
 }
 
@@ -146,7 +146,7 @@ h3 {
     background: #E6E6E6;
 }
 
-.film-list input {
+.info-list input {
 	font-size: 14px;
     background: #E6E6E6;
     width: 100%;
@@ -179,6 +179,47 @@ h3 {
     background-color: transparent;
 }
 
+.four-column-table-userlist tr td:nth-child(1),
+        .four-column-table-userlist tr td:nth-child(2) {
+    width: 42%; 
+}
+
+.four-column-table-userlist tr td:nth-child(3),
+        .four-column-table-userlist tr td:nth-child(4) {
+    background-color: #FFF;
+    width: 8%;
+}
+
+.four-column-table-userlist tr td:nth-child(3) input,
+        .four-column-table-userlist tr td:nth-child(4) input {
+    background-color: transparent;
+}
+
+.nine-column-table tr td:nth-child(1),
+        .nine-column-table tr td:nth-child(6) {
+    width: 12%;
+}
+
+.nine-column-table tr td:nth-child(2),
+        .nine-column-table tr td:nth-child(4),
+        .nine-column-table tr td:nth-child(5) {
+    width: 15%;
+}
+
+.nine-column-table tr td:nth-child(3),
+        .nine-column-table tr td:nth-child(7) {
+    width: 6%;
+}
+
+.nine-column-table tr td:nth-child(8) {
+    width: 11%;
+}
+
+.nine-column-table tr td:nth-child(9) {
+    background-color: #FFF;
+    width: 8%;
+}
+
 .btn-view {
 	display: block;
     font-style: italic;
@@ -191,4 +232,15 @@ h3 {
 
 .btn-view:hover {
     text-decoration: underline;
+}
+
+.inset-switcher {
+	width: 800px;
+    margin: 20px auto;
+}
+
+.inset-switcher a {
+    color: #8C9FE8;
+    font-style: italic;
+    padding: 5px 30px;
 }

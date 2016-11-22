@@ -27,13 +27,17 @@
     </bean>
      
     <!-- DataSource -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-            destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/stinger_info"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
-    </bean>
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/stinger_info" />
+        <property name="username" value="root" />
+        
+        <property name="password" value="root" />
+        <property name="initialSize" value="5" />
+        <property name="maxActive" value="10" />
+        <property name="maxIdle" value="5" />
+        <property name="minIdle" value="2" />
+     </bean> 
         
     <!-- Hibernate SessionFactory -->    
     <bean id="hibernate5AnnotatedSessionFactory"
@@ -55,12 +59,20 @@
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
     
-    <!-- FilmDao and FilmService beans -->
-    <bean id="filmDao" class="org.dtmhapcs.dao.FilmDaoImpl">
+    <!-- MovieDao, UserDao, VoteDao and DbService beans -->
+    <bean id="movieDao" class="org.dtmhapcs.model.services.db.dao.MovieDaoImpl">
         <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
     </bean>
-    <bean id="filmService" class="org.dtmhapcs.service.FilmServiceImpl">
-        <property name="filmDao" ref="filmDao"/>
+    <bean id="userDao" class="org.dtmhapcs.model.services.db.dao.UserDaoImpl">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+    <bean id="voteDao" class="org.dtmhapcs.model.services.db.dao.VoteDaoImpl">
+        <property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </bean>
+    <bean id="dbService" class="org.dtmhapcs.model.services.db.DbServiceImpl">
+        <property name="movieDao" ref="movieDao"/>
+        <property name="userDao" ref="userDao"/>
+        <property name="voteDao" ref="voteDao"/>
     </bean> 
     
 <!--     Not working, in progress -->

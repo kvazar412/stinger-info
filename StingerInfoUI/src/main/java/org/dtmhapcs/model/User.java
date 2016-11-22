@@ -12,6 +12,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.dtmhapcs.model.enums.UserRole;
 
@@ -22,10 +24,13 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "USER_ID")
+    @NotNull
+    @Size(min = 2, max = 255, message = "User ID must be between 2 and 255 symbols")
     private String userId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "USER_ROLE")
+    @NotNull    
     private UserRole userRole;
 
     public User() {        
@@ -56,9 +61,7 @@ public class User implements Serializable {
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (obj == this) return true;       
-        if (obj.getClass() != getClass()) {
-            return false;            
-        }
+        if (obj.getClass() != getClass()) return false;       
         User rhs = (User) obj;
         return new EqualsBuilder()
                 .append(userId, rhs.userId)

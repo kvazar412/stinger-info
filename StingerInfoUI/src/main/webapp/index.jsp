@@ -9,6 +9,5 @@
 <body>
     <h2>Welcome!</h2>  
     <h4><a href="<c:url value="/searchPage"/>">Let's start!</a></h4>
-<!--     <h4><a href="filmList">Let's start!</a></h4> -->
 </body>
 </html>

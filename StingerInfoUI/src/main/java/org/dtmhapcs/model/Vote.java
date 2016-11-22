@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,27 +18,89 @@ import javax.persistence.TemporalType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.dtmhapcs.model.embedded.VoteId;
 import org.dtmhapcs.model.enums.VoteValue;
 
 @Entity
 @Table(name = "VOTES")
 public class Vote implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;    
 
+    @Embeddable
+    public static class VoteId implements Serializable {
+        private static final long serialVersionUID = 1L;        
+        
+        @Column(name = "movie_id")
+        private String movieId;
+        
+        @Column(name = "user_id")
+        private String userId; 
+        
+        public VoteId() {
+        }
+
+        public VoteId(String movieId, String userId) {
+            this.movieId = movieId;
+            this.userId = userId;
+        }
+
+        @Override
+        public String toString() {            
+            return new ToStringBuilder(this)
+                    .append("movieId", movieId)
+                    .append("userId", userId)
+                    .toString();
+        }
+
+        @Override
+        public int hashCode() {           
+            return new HashCodeBuilder()
+                    .append(movieId)
+                    .append(userId)
+                    .toHashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) return false;
+            if (obj == this) return true;       
+            if (obj.getClass() != getClass()) return false;        
+            VoteId rhs = (VoteId) obj;        
+            return new EqualsBuilder()
+                    .append(movieId, rhs.movieId)
+                    .append(userId, rhs.userId)
+                    .isEquals();
+        }   
+        
+        public String getMovieId() {
+            return movieId;
+        }
+
+        public void setMovieId(String movieId) {
+            this.movieId = movieId;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+    }
+    
     @EmbeddedId
-    private VoteId voteId;
+    private VoteId voteId;    
 
     @ManyToOne
-    @MapsId("filmId")
-    private Film film;
+    @JoinColumn (name = "movie_id", insertable = false, updatable = false)
+    private Movie movie;
 
     @ManyToOne
-    @MapsId("userId")
+    @JoinColumn (name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "VOTE_CHANGED")
+    @Column(name = "VOTE_CHANGED")    
     private Date voteChanged;
 
     @Enumerated(EnumType.STRING)
@@ -45,23 +108,21 @@ public class Vote implements Serializable {
     private VoteValue voteValue;
 
     public Vote() {
-        super();
     }
 
-    public Vote(VoteId voteId, Film film, User user,
-            Date voteChanged, VoteValue voteCalue) {
+    public Vote(VoteId voteId, Movie movie, User user, VoteValue voteValue) {
         this.voteId = voteId;
-        this.film = film;
+        this.movie = movie;
         this.user = user;
-        this.voteChanged = voteChanged;
-        this.voteValue = voteCalue;
+        this.voteChanged = new Date();
+        this.voteValue = voteValue;        
     }        
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("voteId", voteId)
-                .append("film", film)
+                .append("movie", movie)
                 .append("user", user)
                 .append("voteChanged", voteChanged)
                 .append("voteValue", voteValue)
@@ -72,7 +133,7 @@ public class Vote implements Serializable {
     public int hashCode() {
         return new HashCodeBuilder()
                 .append(voteId)
-                .append(film)
+                .append(movie)
                 .append(user)
                 .append(voteChanged)
                 .append(voteValue)
@@ -83,13 +144,11 @@ public class Vote implements Serializable {
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (obj == this) return true;       
-        if (obj.getClass() != getClass()) {
-            return false;
-        }
+        if (obj.getClass() != getClass()) return false;        
         Vote rhs = (Vote) obj;        
         return new EqualsBuilder()
                 .append(voteId, rhs.voteId)
-                .append(film, rhs.film)
+                .append(movie, rhs.movie)
                 .append(user, rhs.user)
                 .append(voteChanged, rhs.voteChanged)
                 .append(voteValue, rhs.voteValue)
@@ -104,12 +163,12 @@ public class Vote implements Serializable {
         this.voteId = voteId;
     }
 
-    public Film getFilm() {
-        return film;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setFilm(Film film) {
-        this.film = film;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public User getUser() {
@@ -126,13 +185,13 @@ public class Vote implements Serializable {
 
     public void setVoteChanged(Date voteChanged) {
         this.voteChanged = voteChanged;
-    }
+    } 
 
-    public VoteValue getVoteCalue() {
+    public VoteValue getVoteValue() {
         return voteValue;
     }
 
-    public void setVoteCalue(VoteValue voteCalue) {
-        this.voteValue = voteCalue;
+    public void setVoteCalue(VoteValue voteValue) {
+        this.voteValue = voteValue;
     }
 }

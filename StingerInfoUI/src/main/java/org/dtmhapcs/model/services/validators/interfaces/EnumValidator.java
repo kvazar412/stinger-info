@@ -1,4 +1,4 @@
-package org.dtmhapcs.service.interfaces;
+package org.dtmhapcs.model.services.validators.interfaces;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import org.dtmhapcs.service.EnumValidatorImpl;
+import org.dtmhapcs.model.services.validators.EnumValidatorImpl;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static java.lang.annotation.ElementType.TYPE;
