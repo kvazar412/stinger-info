@@ -23,8 +23,27 @@ import org.dtmhapcs.model.enums.VoteValue;
 @Entity
 @Table(name = "VOTES")
 public class Vote implements Serializable {
-    private static final long serialVersionUID = 1L;    
+    private static final long serialVersionUID = 1L;  
 
+    @EmbeddedId
+    private VoteId voteId;    
+
+    @ManyToOne
+    @JoinColumn (name = "movie_id", insertable = false, updatable = false)
+    private Movie movie;
+
+    @ManyToOne
+    @JoinColumn (name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "VOTE_CHANGED")    
+    private Date voteChanged;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "VOTE_VALUE")
+    private VoteValue voteValue;
+    
     @Embeddable
     public static class VoteId implements Serializable {
         private static final long serialVersionUID = 1L;        
@@ -87,25 +106,6 @@ public class Vote implements Serializable {
             this.userId = userId;
         }
     }
-    
-    @EmbeddedId
-    private VoteId voteId;    
-
-    @ManyToOne
-    @JoinColumn (name = "movie_id", insertable = false, updatable = false)
-    private Movie movie;
-
-    @ManyToOne
-    @JoinColumn (name = "user_id", insertable = false, updatable = false)
-    private User user;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "VOTE_CHANGED")    
-    private Date voteChanged;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "VOTE_VALUE")
-    private VoteValue voteValue;
 
     public Vote() {
     }

@@ -44,8 +44,7 @@ public class VoteDaoImpl implements VoteDao {
             Query<?> query = session.createQuery("DELETE FROM Vote v" + "WHERE v.voteId.movieId = :movieId AND v.voteId.userId = :userId");
             query.setParameter("movieId", movieId);
             query.setParameter("userId", userId);
-            int result = query.executeUpdate();
-            System.out.println("Rows deleted: " + result);
+            query.executeUpdate();
         }
     }
 }
