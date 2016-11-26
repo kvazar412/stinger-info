@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
+                %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="timeBasedFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${USERPROFILE}/DTMHAPCS/log/log.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>30Mb</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
+                %msg%n</pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+    </appender>
+
+    <logger name="org.dtmhapcs" level="info">
+        <appender-ref ref="timeBasedFileAppender"/>       
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="consoleAppender"/>            
+    </root>
+</configuration>

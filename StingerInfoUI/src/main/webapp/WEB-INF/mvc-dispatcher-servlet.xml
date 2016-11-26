@@ -29,7 +29,7 @@
     <!-- DataSource -->
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/stinger_info" />
+        <property name="url" value="jdbc:mysql://localhost:3306/stinger_info?useSSL=false" />
         <property name="username" value="root" />
         
         <property name="password" value="root" />
@@ -74,10 +74,4 @@
         <property name="userDao" ref="userDao"/>
         <property name="voteDao" ref="voteDao"/>
     </bean> 
-    
-<!--     Not working, in progress -->
-<!--     <bean id="messageSource" -->
-<!--             class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  -->
-<!--         <property name="basename" value="/WEB-INF/resources/messages"/> -->
-<!--     </bean> -->    
 </beans>

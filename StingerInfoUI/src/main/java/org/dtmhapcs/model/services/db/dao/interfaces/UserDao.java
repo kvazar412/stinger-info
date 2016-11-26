@@ -8,5 +8,5 @@ public interface UserDao {
     void createOrUpdate (User user);
     User readUserById (String userId);
     List<User> readAllUsers ();
-    void deleteUser (String userId);
+    void deleteUser(String userId);
 }
