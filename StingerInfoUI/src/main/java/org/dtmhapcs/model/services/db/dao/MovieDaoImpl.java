@@ -28,18 +28,14 @@ public class MovieDaoImpl implements MovieDao {
     public void createOrUpdate(Movie movie) {
         Session session = this.sessionFactory.getCurrentSession();
         session.saveOrUpdate(movie);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("Movie {} is saved or updated to DB", movie); 
-        }   
+        LOGGER.info("Movie {} is saved or updated to DB", movie);
     }
 
     @Override
     public Movie readMovieById(String movieId) {
         Session session = this.sessionFactory.getCurrentSession();
         Movie movie = session.get(Movie.class, movieId);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("Movie {} is returned from DB", movie); 
-        } 
+        LOGGER.debug("Movie {} is returned from DB", movie);
         return movie;
     }
 
@@ -50,9 +46,7 @@ public class MovieDaoImpl implements MovieDao {
         for (Object obj : session.createQuery("FROM Movie m").getResultList()) {
             movieList.add((Movie) obj);
         }
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("List of movies are returned from DB");
-        }        
+        LOGGER.debug("List of movies are returned from DB");
         return movieList;
     }
 
@@ -60,11 +54,9 @@ public class MovieDaoImpl implements MovieDao {
     public void deleteMovie(String movieId) {
         Session session = sessionFactory.getCurrentSession();
         Movie movie = session.get(Movie.class, movieId);
-        if (movie != null) {                     
-            session.delete(movie);   
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info("Movie {} is deleted from DB", movie); 
-            }   
+        if (movie != null) {
+            session.delete(movie);
+            LOGGER.info("Movie {} is deleted from DB", movie);
         }
     }
 }

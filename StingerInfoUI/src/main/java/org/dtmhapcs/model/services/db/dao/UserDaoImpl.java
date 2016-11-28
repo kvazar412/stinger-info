@@ -28,18 +28,14 @@ public class UserDaoImpl implements UserDao {
     public void createOrUpdate(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.saveOrUpdate(user);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("User {} is saved or updated to DB", user); 
-        }
+        LOGGER.info("User {} is saved or updated to DB", user);
     }
 
     @Override
     public User readUserById(String userId) {
         Session session = this.sessionFactory.getCurrentSession();
         User user = session.get(User.class, userId);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("User {} is returned from DB", user); 
-        }
+        LOGGER.debug("User {} is returned from DB", user);
         return user;
     }
 
@@ -50,21 +46,17 @@ public class UserDaoImpl implements UserDao {
         for (Object obj : session.createQuery("FROM User u").getResultList()) {
             userList.add((User) obj);
         }
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("List of users are returned from DB");
-        }
+        LOGGER.debug("List of users are returned from DB");
         return userList;
     }
 
     @Override
     public void deleteUser(String userId) {
         Session session = this.sessionFactory.getCurrentSession();
-        User user = session.get(User.class, userId);        
+        User user = session.get(User.class, userId);
         if (user != null) {
             session.delete(user);
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info("User {} is deleted from DB", user); 
-            }
+            LOGGER.info("User {} is deleted from DB", user);
         }
     }
 }

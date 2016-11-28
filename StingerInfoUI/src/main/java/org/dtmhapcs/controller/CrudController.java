@@ -28,25 +28,19 @@ public class CrudController {
     // ******* Mapping urls of searchPage.jsp *******
     @RequestMapping(value = "searchPage")
     public String searchPage() {
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("Processing searchPage url"); 
-        }
+        LOGGER.debug("Processing searchPage url");
         return "searchPage";
     }
 
     // ******* Mapping urls of movieList.jsp *******
     @RequestMapping(value = "/createOrUpdateMovie", method = RequestMethod.POST)
-    public String createMovie(@Valid Movie movie, BindingResult bindingResult) {        
+    public String createMovie(@Valid Movie movie, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            if(LOGGER.isInfoEnabled()){
-                LOGGER.info("Movie input form has {} error(s)", bindingResult.getErrorCount()); 
-            }
+            LOGGER.warn("Movie input form has {} error(s)", bindingResult.getErrorCount());
             return "movieList";
         } else {
             this.dbService.createOrUpdate(movie);
-            if(LOGGER.isInfoEnabled()){
-                LOGGER.info("Processing create/update command for {}", movie); 
-            }
+            LOGGER.debug("Processing create/update command for {}", movie);
             return "redirect:/movieList";
         }
     }
@@ -55,9 +49,7 @@ public class CrudController {
     public String readMovieById(@PathVariable("movieId") String movieId, Model model) {
         model.addAttribute("movie", this.dbService.readMovieById(movieId));
         model.addAttribute("movieList", this.dbService.readAllMovies());
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("Processing readMovie url for movieId = {}", movieId); 
-        }
+        LOGGER.debug("Processing readMovie url for movieId = {}", movieId);
         return "movieList";
     }
 
@@ -65,18 +57,14 @@ public class CrudController {
     public String movieList(Model model) {
         model.addAttribute("movie", new Movie());
         model.addAttribute("movieList", this.dbService.readAllMovies());
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("Processing movieList url"); 
-        }
+        LOGGER.debug("Processing movieList url");
         return "movieList";
     }
 
     @RequestMapping(value = "/deleteMovie/{movieId}", method = RequestMethod.GET)
     public String deleteMovie(@PathVariable("movieId") String movieId) {
         this.dbService.deleteMovie(movieId);
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("Processing deleteMovie url for movieId = {}", movieId); 
-        }
+        LOGGER.debug("Processing deleteMovie url for movieId = {}", movieId);
         return "redirect:/movieList";
     }
 
@@ -84,15 +72,11 @@ public class CrudController {
     @RequestMapping(value = "createOrUpdateUser", method = RequestMethod.POST)
     public String createUser(@Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            if(LOGGER.isInfoEnabled()){
-                LOGGER.info("User input form has {} error(s)", bindingResult.getErrorCount()); 
-            }
+            LOGGER.warn("User input form has {} error(s)", bindingResult.getErrorCount());
             return "userList";
         } else {
             this.dbService.createOrUpdate(user);
-            if(LOGGER.isInfoEnabled()){
-                LOGGER.info("Processing create/update command for {}", user); 
-            }
+            LOGGER.debug("Processing create/update command for {}", user);
             return "redirect:/userList";
         }
     }
@@ -101,9 +85,7 @@ public class CrudController {
     public String readUserById(@PathVariable("userId") String userId, Model model) {
         model.addAttribute("user", this.dbService.readUserById(userId));
         model.addAttribute("userList", this.dbService.readAllUsers());
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("Processing readUser url for userId = {}", userId); 
-        }
+        LOGGER.debug("Processing readUser url for userId = {}", userId);
         return "userList";
     }
 
@@ -111,18 +93,14 @@ public class CrudController {
     public String userList(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("userList", this.dbService.readAllUsers());
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("Processing userList url"); 
-        }
+        LOGGER.debug("Processing userList url");
         return "userList";
     }
 
     @RequestMapping(value = "/deleteUser/{userId}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("userId") String userId) {
         this.dbService.deleteUser(userId);
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("Processing deleteUser url for userId = {}", userId); 
-        }
+        LOGGER.debug("Processing deleteUser url for userId = {}", userId);
         return "redirect:/userList";
     }
 
@@ -130,18 +108,14 @@ public class CrudController {
     @RequestMapping(value = "voteList", method = RequestMethod.GET)
     public String voteList(Model model) {
         model.addAttribute("voteList", this.dbService.readAllVotes());
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("Processing voteList url"); 
-        }
+        LOGGER.debug("Processing voteList url");
         return "voteList";
     }
 
     @RequestMapping(value = "/deleteVote/{movieId}&{userId}", method = RequestMethod.GET)
     public String deleteVote(@PathVariable("movieId") String movieId, @PathVariable("userId") String userId) {
         this.dbService.deleteVote(movieId, userId);
-        if(LOGGER.isInfoEnabled()){
-            LOGGER.info("Processing deleteUser url for movieId = {} and userId = {}", movieId, userId); 
-        }
+        LOGGER.debug("Processing deleteUser url for movieId = {} and userId = {}", movieId, userId);
         return "redirect:/voteList";
     }
 }

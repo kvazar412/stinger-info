@@ -28,9 +28,7 @@ public class VoteDaoImpl implements VoteDao {
     public void createOrUpdate(Vote vote) {
         Session session = this.sessionFactory.getCurrentSession();
         session.saveOrUpdate(vote);
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("Vote {} is saved or updated to DB", vote);
-        }
+        LOGGER.info("Vote {} is saved or updated to DB", vote);
     }
 
     @Override
@@ -40,9 +38,7 @@ public class VoteDaoImpl implements VoteDao {
         for (Object obj : session.createQuery("FROM Vote v").getResultList()) {
             voteList.add((Vote) obj);
         }
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("Votes {} is returned from DB");
-        }
+        LOGGER.debug("Votes {} is returned from DB");
         return voteList;
     }
 
@@ -54,9 +50,7 @@ public class VoteDaoImpl implements VoteDao {
             query.setParameter("movieId", movieId);
             query.setParameter("userId", userId);
             query.executeUpdate();
-            if (LOGGER.isInfoEnabled()) {
-                LOGGER.info("Vote with movieId {} and userId {} is deleted from DB", movieId, userId);
-            }
+            LOGGER.info("Vote with movieId {} and userId {} is deleted from DB", movieId, userId);
         }
     }
 }
