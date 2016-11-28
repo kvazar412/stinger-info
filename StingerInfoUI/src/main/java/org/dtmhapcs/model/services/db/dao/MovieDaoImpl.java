@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository("movieDao")
 public class MovieDaoImpl implements MovieDao {
     private SessionFactory sessionFactory;
-    static final Logger LOGGER = LoggerFactory.getLogger(MovieDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MovieDaoImpl.class);
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;

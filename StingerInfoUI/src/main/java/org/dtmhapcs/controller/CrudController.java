@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CrudController {
     private DbService dbService;
-    static final Logger LOGGER = LoggerFactory.getLogger(CrudController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CrudController.class);
 
     @Autowired(required = true)
     public void setDbService(DbService dbService) {

@@ -11,10 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository("userDao")
 public class UserDaoImpl implements UserDao {
     private SessionFactory sessionFactory;
-    static final Logger LOGGER = LoggerFactory.getLogger(UserDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDaoImpl.class);
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;

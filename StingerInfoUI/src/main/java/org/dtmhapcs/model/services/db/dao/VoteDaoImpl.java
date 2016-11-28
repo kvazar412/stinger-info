@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository("voteDao")
 public class VoteDaoImpl implements VoteDao {
     private SessionFactory sessionFactory;
-    static final Logger LOGGER = LoggerFactory.getLogger(VoteDaoImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(VoteDaoImpl.class);
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;
