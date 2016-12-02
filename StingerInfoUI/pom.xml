@@ -18,6 +18,7 @@
         <validation-api.version>1.1.0.Final</validation-api.version>
         <logback-classic.version>1.1.7</logback-classic.version>
         <junit.version>4.12</junit.version>
+        <mockito-core.version>2.2.27</mockito-core.version>
     </properties>
 
     <distributionManagement>
@@ -114,6 +115,13 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
         </dependency>
 
         <!-- Logback -->

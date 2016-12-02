@@ -5,7 +5,7 @@ import java.util.List;
 import org.dtmhapcs.model.User;
 
 public interface UserDao {
-    void createOrUpdate (User user);
+    void createOrUpdateUser (User user);
     User readUserById (String userId);
     List<User> readAllUsers ();
     void deleteUser(String userId);

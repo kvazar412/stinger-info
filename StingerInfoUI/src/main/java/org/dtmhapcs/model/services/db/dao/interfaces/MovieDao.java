@@ -5,8 +5,8 @@ import java.util.List;
 import org.dtmhapcs.model.Movie;
 
 public interface MovieDao {
-    void createOrUpdate (Movie movie);
-    Movie readMovieById (String filmId);
+    void createOrUpdateMovie (Movie movie);
+    Movie readMovieById (String movieId);
     List<Movie> readAllMovies();
-    void deleteMovie (String filmId);
+    void deleteMovie (String movieId);
 }

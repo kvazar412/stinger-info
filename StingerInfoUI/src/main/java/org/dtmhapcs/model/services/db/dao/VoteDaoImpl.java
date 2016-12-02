@@ -25,7 +25,7 @@ public class VoteDaoImpl implements VoteDao {
     }
 
     @Override
-    public void createOrUpdate(Vote vote) {
+    public void createOrUpdateVote(Vote vote) {
         Session session = this.sessionFactory.getCurrentSession();
         session.saveOrUpdate(vote);
         LOGGER.info("Vote {} is saved or updated to DB", vote);

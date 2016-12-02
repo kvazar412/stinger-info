@@ -21,5 +21,5 @@ public class EnumValidatorImpl implements ConstraintValidator<EnumValidator, Str
             }
         }
         return false;
-    }    
+    }   
 }

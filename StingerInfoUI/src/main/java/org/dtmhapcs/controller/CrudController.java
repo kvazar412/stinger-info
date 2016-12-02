@@ -39,7 +39,7 @@ public class CrudController {
             LOGGER.warn("Movie input form has {} error(s)", bindingResult.getErrorCount());
             return "movieList";
         } else {
-            this.dbService.createOrUpdate(movie);
+            this.dbService.createOrUpdateMovie(movie);
             LOGGER.debug("Processing create/update command for {}", movie);
             return "redirect:/movieList";
         }
@@ -75,7 +75,7 @@ public class CrudController {
             LOGGER.warn("User input form has {} error(s)", bindingResult.getErrorCount());
             return "userList";
         } else {
-            this.dbService.createOrUpdate(user);
+            this.dbService.createOrUpdateUser(user);
             LOGGER.debug("Processing create/update command for {}", user);
             return "redirect:/userList";
         }

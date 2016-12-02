@@ -25,7 +25,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public void createOrUpdate(Movie movie) {
+    public void createOrUpdateMovie(Movie movie) {
         Session session = this.sessionFactory.getCurrentSession();
         session.saveOrUpdate(movie);
         LOGGER.info("Movie {} is saved or updated to DB", movie);

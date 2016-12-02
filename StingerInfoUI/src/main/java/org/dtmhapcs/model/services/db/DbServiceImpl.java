@@ -18,8 +18,8 @@ public class DbServiceImpl implements DbService {
 
     @Transactional
     @Override
-    public void createOrUpdate(Movie movie) {
-        this.movieDao.createOrUpdate(movie);
+    public void createOrUpdateMovie(Movie movie) {
+        this.movieDao.createOrUpdateMovie(movie);
     }
 
     @Transactional
@@ -42,8 +42,8 @@ public class DbServiceImpl implements DbService {
 
     @Transactional
     @Override
-    public void createOrUpdate(User user) {
-        this.userDao.createOrUpdate(user);
+    public void createOrUpdateUser(User user) {
+        this.userDao.createOrUpdateUser(user);
     }
 
     @Transactional
@@ -66,8 +66,8 @@ public class DbServiceImpl implements DbService {
     
     @Transactional
     @Override
-    public void createOrUpdate(Vote vote) {
-        this.voteDao.createOrUpdate(vote);
+    public void createOrUpdateVote(Vote vote) {
+        this.voteDao.createOrUpdateVote(vote);
     }
     
     @Transactional

@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void createOrUpdate(User user) {
+    public void createOrUpdateUser(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.saveOrUpdate(user);
         LOGGER.info("User {} is saved or updated to DB", user);
