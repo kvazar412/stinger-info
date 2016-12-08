@@ -47,7 +47,11 @@ public class CrudController {
 
     @RequestMapping(value = "/readMovie/{movieId}", method = RequestMethod.GET)
     public String readMovieById(@PathVariable("movieId") String movieId, Model model) {
-        model.addAttribute("movie", this.dbService.readMovieById(movieId));
+        Movie resultMovie = this.dbService.readMovieById(movieId);
+        if (resultMovie == null) {
+            resultMovie = new Movie();
+        }
+        model.addAttribute("movie", resultMovie);
         model.addAttribute("movieList", this.dbService.readAllMovies());
         LOGGER.debug("Processing readMovie url for movieId = {}", movieId);
         return "movieList";
@@ -63,8 +67,10 @@ public class CrudController {
 
     @RequestMapping(value = "/deleteMovie/{movieId}", method = RequestMethod.GET)
     public String deleteMovie(@PathVariable("movieId") String movieId) {
-        this.dbService.deleteMovie(movieId);
-        LOGGER.debug("Processing deleteMovie url for movieId = {}", movieId);
+        if (movieId.trim().length() > 1) {
+            this.dbService.deleteMovie(movieId);
+            LOGGER.debug("Processing deleteMovie url for movieId = {}", movieId);
+        }
         return "redirect:/movieList";
     }
 

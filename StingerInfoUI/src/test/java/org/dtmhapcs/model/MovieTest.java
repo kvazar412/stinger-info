@@ -4,20 +4,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.dtmhapcs.model.enums.PcsInfo;
-import org.dtmhapcs.model.interfaces.BaseModelTest;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class MovieTest implements BaseModelTest {
-    private static Movie movie;
-    
-    @BeforeClass
-    public static void initialize() {        
-        movie = new Movie("123456", "Title", 2016, "Director", "Country", PcsInfo.YES);
-    }
+public class MovieTest {
+    private Movie movie = new Movie("123456", "Title", 2016, "Director", "Country", PcsInfo.YES);
 
     @Test
-    public void hashCodeForEqualsIsEqual() {
+    public void hashCodeShouldBeEqualForEquals() {
         Movie otherMovie = new Movie("123456", "Title", 2016, "Director", "Country", PcsInfo.YES);
         assertTrue(movie.hashCode() == otherMovie.hashCode());
     }
@@ -30,25 +23,25 @@ public class MovieTest implements BaseModelTest {
     }
 
     @Test
-    public void equalsWithDefaultModel() {
+    public void shouldNotBeEqualWithDefaultMovie() {
         Movie otherMovie = new Movie();
         assertFalse(movie.equals(otherMovie));
     }
 
     @Test
-    public void equalsWithOtherModel() {
+    public void shouldNotBeEqualWithNonEqualMovie() {
         Movie otherMovie = new Movie("123456", "OtherTitle", 2016, "Director", "Country", PcsInfo.YES);
         assertFalse(movie.equals(otherMovie));
     }
 
     @Test
-    public void equalsWithSameModel() {
+    public void shouldBeEqualWithEqualMovie() {
         Movie otherMovie = new Movie("123456", "Title", 2016, "Director", "Country", PcsInfo.YES);
         assertTrue(movie.equals(otherMovie));
     }
 
     @Test
-    public void toStringContainsId() {
+    public void toStringShouldContainMovieId() {
         assertTrue(movie.toString().contains("123456"));
     }
 }

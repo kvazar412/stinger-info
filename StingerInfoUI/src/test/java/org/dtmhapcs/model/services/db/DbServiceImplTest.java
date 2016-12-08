@@ -1,9 +1,12 @@
 package org.dtmhapcs.model.services.db;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.dtmhapcs.model.Movie;
 import org.dtmhapcs.model.User;
@@ -15,7 +18,6 @@ import org.dtmhapcs.model.enums.VoteValue;
 import org.dtmhapcs.model.services.db.dao.MovieDaoImpl;
 import org.dtmhapcs.model.services.db.dao.UserDaoImpl;
 import org.dtmhapcs.model.services.db.dao.VoteDaoImpl;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,108 +31,138 @@ public class DbServiceImplTest {
 
     @Mock
     private UserDaoImpl userDaoMock;
-    
+
     @Mock
     private VoteDaoImpl voteDaoMock;
 
     @InjectMocks
-    private DbServiceImpl dbService;
+    private DbServiceImpl dbServiceMock;
 
-    private static String movieId;
-    private static Movie movie;
-    private static String userId;
-    private static User user;    
-    private static VoteId voteId;
-    private static Vote vote;
+    private String movieId = "123456";
+    private String otherMovieId = "234567";
 
-    @BeforeClass
-    public static void initialize() {
-        movieId = "123456";
-        movie = new Movie(movieId, "Title", 2016, "Director", "Country", PcsInfo.YES);
-        userId = "123456";
-        user = new User(userId, UserRole.USER);
-        voteId = new VoteId(movieId, userId);
-        vote = new Vote(voteId, movie, user, VoteValue.YES);
-    }
+    private Movie movie = new Movie(movieId, "Title", 2016, "Director", "Country", PcsInfo.YES);
+    private Movie otherMovie = new Movie(otherMovieId, "Title", 2016, "Director", "Country", PcsInfo.YES);
+
+    private String userId = "123456";
+    private String otherUserId = "234567";
+
+    private User user = new User(userId, UserRole.USER);
+    private User otherUser = new User(otherUserId, UserRole.USER);
+
+    private VoteId voteId = new VoteId(movieId, userId);
+    private VoteId otherVoteId = new VoteId(otherMovieId, otherUserId);
+
+    private Vote vote = new Vote(voteId, movie, user, VoteValue.YES);
+    private Vote otherVote = new Vote(otherVoteId, otherMovie, otherUser, VoteValue.YES);
 
     @Test
-    public void createOrUpdateMovieDelegateToTheSameDaoMethod() {
-        dbService.createOrUpdateMovie(movie);
+    public void createOrUpdateMovieShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.createOrUpdateMovie(movie);
         verify(movieDaoMock).createOrUpdateMovie(movie);
     }
 
     @Test
-    public void readMovieByIdDelegateToTheSameDaoMethod() {
-        dbService.readMovieById(movieId);
+    public void readMovieByIdShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.readMovieById(movieId);
         verify(movieDaoMock).readMovieById(movieId);
     }
 
     @Test
     public void readMovieByIdShouldReturnTheSameMovieAsDaoMethod() {
         when(movieDaoMock.readMovieById(movieId)).thenReturn(movie);
-        Movie movieFromService = dbService.readMovieById(movieId);
-        assertTrue(movieFromService.equals(movie));
+        Movie movieFromService = dbServiceMock.readMovieById(movieId);
+        assertEquals(movieFromService, movie);
     }
 
     @Test
-    public void readAllMoviesDelegateToTheSameDaoMethod() {
-        dbService.readAllMovies();
+    public void readAllMoviesShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.readAllMovies();
         verify(movieDaoMock).readAllMovies();
     }
 
     @Test
-    public void deleteMovieDelegateToTheSameDaoMethod() {
-        dbService.deleteMovie(movieId);
+    public void readAllMoviesShouldReturnTheSameMovieListAsDaoMethod() {
+        List<Movie> movieList = new ArrayList<Movie>();
+        movieList.add(movie);
+        movieList.add(otherMovie);
+        when(movieDaoMock.readAllMovies()).thenReturn(movieList);
+        List<Movie> movieListFromService = dbServiceMock.readAllMovies();
+        assertTrue((movieList.size() == movieListFromService.size()) && (movieList.containsAll(movieListFromService)));
+    }
+
+    @Test
+    public void deleteMovieShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.deleteMovie(movieId);
         verify(movieDaoMock).deleteMovie(movieId);
     }
 
     @Test
-    public void createOrUpdateUserDelegateToTheSameDaoMethod() {
-        dbService.createOrUpdateUser(user);
+    public void createOrUpdateUserShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.createOrUpdateUser(user);
         verify(userDaoMock).createOrUpdateUser(user);
     }
 
     @Test
-    public void readUserByIdDelegateToTheSameDaoMethod() {
-        dbService.readUserById(userId);
+    public void readUserByIdShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.readUserById(userId);
         verify(userDaoMock).readUserById(userId);
     }
 
     @Test
     public void readUserByIdShouldReturnTheSameUserAsDaoMethod() {
         when(userDaoMock.readUserById(userId)).thenReturn(user);
-        User userFromService = dbService.readUserById(userId);
-        assertTrue(user.equals(userFromService));
-        assertSame(user, userFromService);
+        User userFromService = dbServiceMock.readUserById(userId);
+        assertEquals(userFromService, user);
     }
-    
+
     @Test
-    public void readAllUsersDelegateToTheSameDaoMethod() {
-        dbService.readAllUsers();
-        verify(userDaoMock).readAllUsers();        
+    public void readAllUsersShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.readAllUsers();
+        verify(userDaoMock).readAllUsers();
     }
-    
+
     @Test
-    public void deleteUserDelegateToTheSameDaoMethod() {
-        dbService.deleteUser(userId);
+    public void readAllUsersShouldReturnTheSameUserListAsDaoMethod() {
+        List<User> userList = new ArrayList<User>();
+        userList.add(user);
+        userList.add(otherUser);
+        when(userDaoMock.readAllUsers()).thenReturn(userList);
+        List<User> userListFromService = dbServiceMock.readAllUsers();
+        assertTrue((userList.size() == userListFromService.size()) && userList.containsAll(userListFromService));
+    }
+
+    @Test
+    public void deleteUserShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.deleteUser(userId);
         verify(userDaoMock).deleteUser(userId);
     }
-    
+
     @Test
-    public void createOrUpdateVoteDelegateToTheSameDaoMethod() {
-        dbService.createOrUpdateVote(vote);
+    public void createOrUpdateVoteShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.createOrUpdateVote(vote);
         verify(voteDaoMock).createOrUpdateVote(vote);
     }
-    
+
     @Test
-    public void readAllVotesDelegateToTheSameDaoMethod() {
-        dbService.readAllVotes();
+    public void readAllVotesShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.readAllVotes();
         verify(voteDaoMock).readAllVotes();
     }
-    
+
     @Test
-    public void deleteVoteDelegateToTheSameDaoMethod() {
-        dbService.deleteVote(movieId, userId);
+    public void readAllVotesShouldReturnTheSameVoteListAsDaoMethod() {
+        List<Vote> voteList = new ArrayList<Vote>();
+        voteList.add(vote);
+        voteList.add(otherVote);
+        when(voteDaoMock.readAllVotes()).thenReturn(voteList);
+        List<Vote> voteListFromService = dbServiceMock.readAllVotes();
+        assertTrue((voteList.size() == voteListFromService.size()) && voteList.containsAll(voteListFromService));
+    }
+
+    @Test
+    public void deleteVoteShouldDelegateToTheSameDaoMethod() {
+        dbServiceMock.deleteVote(movieId, userId);
         verify(voteDaoMock).deleteVote(movieId, userId);
     }
 }

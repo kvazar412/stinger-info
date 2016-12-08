@@ -63,13 +63,13 @@ public class DbServiceImpl implements DbService {
     public void deleteUser(String userId) {
         this.userDao.deleteUser(userId);
     }
-    
+
     @Transactional
     @Override
     public void createOrUpdateVote(Vote vote) {
         this.voteDao.createOrUpdateVote(vote);
     }
-    
+
     @Transactional
     @Override
     public List<Vote> readAllVotes() {

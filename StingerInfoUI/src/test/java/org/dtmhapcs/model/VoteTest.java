@@ -7,31 +7,16 @@ import org.dtmhapcs.model.Vote.VoteId;
 import org.dtmhapcs.model.enums.PcsInfo;
 import org.dtmhapcs.model.enums.UserRole;
 import org.dtmhapcs.model.enums.VoteValue;
-import org.dtmhapcs.model.interfaces.BaseModelTest;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class VoteTest implements BaseModelTest {
-    private static VoteId voteId;    
-    private static Movie movie;    
-    private static User user;    
-    private static Vote vote;
-    private  Vote otherVote;
-    
-    @BeforeClass
-    public static void initialize() {
-        voteId = new VoteId("123456", "123456");
-        movie = new Movie("123456", "Title", 2016, "Director", "Country", PcsInfo.YES);
-        user = new User("123456", UserRole.USER);
-        vote = new Vote(voteId, movie, user, VoteValue.YES);        
-    }
-        
-    @Override
-    public void hashCodeForEqualsIsEqual() {
-    }
+public class VoteTest {
+    private VoteId voteId = new VoteId("123456", "123456");
+    private Movie movie = new Movie("123456", "Title", 2016, "Director", "Country", PcsInfo.YES);
+    private User user = new User("123456", UserRole.USER);
+    private Vote vote = new Vote(voteId, movie, user, VoteValue.YES);
+    private Vote otherVote;
 
     @Test
-    @Override
     public void equalsForBoundaryConditions() {
         assertFalse(vote.equals(null));
         assertTrue(vote.equals(vote));
@@ -39,26 +24,24 @@ public class VoteTest implements BaseModelTest {
     }
 
     @Test
-    @Override
-    public void equalsWithDefaultModel() {
+    public void shouldNotBeEqualWithDefaultMovie() {
         otherVote = new Vote();
         assertFalse(vote.equals(otherVote));
     }
 
     @Test
-    @Override
-    public void equalsWithOtherModel() {
+    public void shouldNotBeEqualWithNonEqualMovie() {
         otherVote = new Vote(voteId, movie, user, VoteValue.NO);
         assertFalse(vote.equals(otherVote));
     }
 
-    @Override
-    public void equalsWithSameModel() {
+    @Test
+    public void toStringShouldContainMovieId() {
+        assertTrue(vote.toString().contains(movie.getMovieId()));
     }
 
     @Test
-    @Override
-    public void toStringContainsId() {
-        assertTrue(vote.toString().contains("123456"));
+    public void toStringShouldContainUserId() {
+        assertTrue(vote.toString().contains(user.getUserId()));
     }
 }
