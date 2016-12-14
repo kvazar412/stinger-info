@@ -30,43 +30,37 @@ public class User implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "USER_ROLE")
-    @NotNull    
+    @NotNull
     private UserRole userRole;
 
-    public User() {        
+    public User() {
     }
 
     public User(String userId, UserRole userRole) {
         this.userId = userId;
         this.userRole = userRole;
-    }    
-    
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("userId", userId)
-                .append("userRole", userRole)
-                .toString();
-    }  
-    
+        return new ToStringBuilder(this).append("userId", userId).append("userRole", userRole).toString();
+    }
+
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .append(userId)
-                .append(userRole)
-                .toHashCode();
+        return new HashCodeBuilder().append(userId).append(userRole).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (obj == this) return true;       
-        if (obj.getClass() != getClass()) return false;       
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (obj.getClass() != getClass())
+            return false;
         User rhs = (User) obj;
-        return new EqualsBuilder()
-                .append(userId, rhs.userId)
-                .append(userRole, rhs.userRole)
-                .isEquals();
+        return new EqualsBuilder().append(userId, rhs.userId).append(userRole, rhs.userRole).isEquals();
     }
 
     public String getUserId() {

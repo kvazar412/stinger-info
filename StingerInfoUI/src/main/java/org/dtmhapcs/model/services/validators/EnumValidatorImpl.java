@@ -19,9 +19,6 @@ public class EnumValidatorImpl implements ConstraintValidator<EnumValidator, Str
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (acceptableValues.contains(value)) {
-            return true;
-        }
-        return false;
+        return acceptableValues.contains(value);
     }
 }

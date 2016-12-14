@@ -18,7 +18,7 @@ public class VoteTest {
 
     @Test
     public void testEqualsForBoundaryConditions() {
-        assertFalse(vote.equals(null));
+        assertFalse(vote == null);
         assertTrue(vote.equals(vote));
         assertFalse(vote.equals(new Object()));
     }

@@ -18,7 +18,7 @@ public class MovieTest {
 
     @Test
     public void testEqualsForBoundaryConditions() {
-        assertFalse(movie.equals(null));
+        assertFalse(movie == null);
         assertTrue(movie.equals(movie));
         assertFalse(movie.equals(new Object()));
     }

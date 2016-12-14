@@ -19,8 +19,10 @@ import static java.lang.annotation.ElementType.TYPE;
 
 public @interface EnumValidator {
     String message() default "From EnumValidator.defaultMessage: not acceptable!";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
-    
-    String[] value();  
+
+    String[] value();
 }

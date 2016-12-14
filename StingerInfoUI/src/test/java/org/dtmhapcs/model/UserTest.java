@@ -19,7 +19,7 @@ public class UserTest {
 
     @Test
     public void testEqualsForBoundaryConditions() {
-        assertFalse(user.equals(null));
+        assertFalse(user == null);
         assertTrue(user.equals(user));
         assertFalse(user.equals(new Object()));
     }

@@ -89,7 +89,7 @@ public class CrudControllerTest {
     public void testSearchPageReturnsRightUrl() {
         resultUrl = crudController.searchPage();
 
-        assertTrue(resultUrl.equals("searchPage"));
+        assertTrue("searchPage".equals(resultUrl));
     }
 
     // ******* Tests for mapping urls of movieList.jsp *******
@@ -98,7 +98,7 @@ public class CrudControllerTest {
         when(bindingResultMock.hasErrors()).thenReturn(true);
         resultUrl = crudController.createMovie(movie, bindingResultMock);
 
-        assertTrue(resultUrl.equals("movieList"));
+        assertTrue("movieList".equals(resultUrl));
     }
 
     @Test
@@ -106,7 +106,7 @@ public class CrudControllerTest {
         when(bindingResultMock.hasErrors()).thenReturn(false);
         resultUrl = crudController.createMovie(movie, bindingResultMock);
 
-        assertTrue(resultUrl.equals("redirect:/movieList"));
+        assertTrue("redirect:/movieList".equals(resultUrl));
     }
 
     @Test
@@ -125,7 +125,7 @@ public class CrudControllerTest {
         when(dbServiceMock.readAllMovies()).thenReturn(movieList);
         resultUrl = crudController.readMovieById(movieId, model);
 
-        assertTrue(resultUrl.equals("movieList"));
+        assertTrue("movieList".equals(resultUrl));
     }
 
     @Test
@@ -173,7 +173,7 @@ public class CrudControllerTest {
         when(dbServiceMock.readAllMovies()).thenReturn(movieList);
         resultUrl = crudController.movieList(model);
 
-        assertTrue(resultUrl.equals("movieList"));
+        assertTrue("movieList".equals(resultUrl));
     }
 
     @Test
@@ -193,7 +193,7 @@ public class CrudControllerTest {
         String movieIdNotValid = null;
         resultUrl = crudController.deleteMovie(movieIdNotValid);
 
-        assertTrue(resultUrl.equals("redirect:/movieList"));
+        assertTrue("redirect:/movieList".equals(resultUrl));
     }
 
     @Test
@@ -201,7 +201,7 @@ public class CrudControllerTest {
         String movieIdNotValid = "   \t \n \r ";
         resultUrl = crudController.deleteMovie(movieIdNotValid);
 
-        assertTrue(resultUrl.equals("redirect:/movieList"));
+        assertTrue("redirect:/movieList".equals(resultUrl));
     }
 
     @Test
@@ -217,7 +217,7 @@ public class CrudControllerTest {
         when(bindingResultMock.hasErrors()).thenReturn(true);
         resultUrl = crudController.createUser(user, bindingResultMock);
 
-        assertTrue(resultUrl.equals("userList"));
+        assertTrue("userList".equals(resultUrl));
     }
 
     @Test
@@ -225,7 +225,7 @@ public class CrudControllerTest {
         when(bindingResultMock.hasErrors()).thenReturn(false);
         resultUrl = crudController.createUser(user, bindingResultMock);
 
-        assertTrue(resultUrl.equals("redirect:/userList"));
+        assertTrue("redirect:/userList".equals(resultUrl));
     }
 
     @Test
@@ -244,7 +244,7 @@ public class CrudControllerTest {
         when(dbServiceMock.readAllUsers()).thenReturn(userList);
         resultUrl = crudController.readUserById(userId, model);
 
-        assertTrue(resultUrl.equals("userList"));
+        assertTrue("userList".equals(resultUrl));
     }
 
     @Test
@@ -292,7 +292,7 @@ public class CrudControllerTest {
         when(dbServiceMock.readAllUsers()).thenReturn(userList);
         resultUrl = crudController.userList(model);
 
-        assertTrue(resultUrl.equals("userList"));
+        assertTrue("userList".equals(resultUrl));
     }
 
     @Test
@@ -313,7 +313,7 @@ public class CrudControllerTest {
 
         resultUrl = crudController.deleteUser(userIdNotValid);
 
-        assertTrue(resultUrl.equals("redirect:/userList"));
+        assertTrue("redirect:/userList".equals(resultUrl));
     }
 
     @Test
@@ -322,7 +322,7 @@ public class CrudControllerTest {
 
         resultUrl = crudController.deleteUser(userIdNotValid);
 
-        assertTrue(resultUrl.equals("redirect:/userList"));
+        assertTrue("redirect:/userList".equals(resultUrl));
     }
 
     @Test
@@ -340,7 +340,7 @@ public class CrudControllerTest {
         when(dbServiceMock.readAllVotes()).thenReturn(voteList);
         resultUrl = crudController.voteList(model);
 
-        assertTrue(resultUrl.equals("voteList"));
+        assertTrue("voteList".equals(resultUrl));
     }
 
     @Test
@@ -362,7 +362,7 @@ public class CrudControllerTest {
 
         resultUrl = crudController.deleteVote(movieIdNotValid, userIdNotValid);
 
-        assertTrue(resultUrl.equals("redirect:/voteList"));
+        assertTrue("redirect:/voteList".equals(resultUrl));
     }
 
     @Test
@@ -376,7 +376,7 @@ public class CrudControllerTest {
 
         resultUrl = crudController.deleteVote(movieIdNotValid, userId);
 
-        assertTrue(resultUrl.equals("redirect:/voteList"));
+        assertTrue("redirect:/voteList".equals(resultUrl));
     }
 
     @Test
@@ -386,7 +386,7 @@ public class CrudControllerTest {
 
         resultUrl = crudController.deleteVote(movieIdNotValid, userIdNotValid);
 
-        assertTrue(resultUrl.equals("redirect:/voteList"));
+        assertTrue("redirect:/voteList".equals(resultUrl));
     }
 
     @Test
@@ -396,11 +396,11 @@ public class CrudControllerTest {
 
         resultUrl = crudController.deleteVote(movieId, userIdNotValid);
 
-        assertTrue(resultUrl.equals("redirect:/voteList"));
+        assertTrue("redirect:/voteList".equals(resultUrl));
 
         resultUrl = crudController.deleteVote(movieIdNotValid, userId);
 
-        assertTrue(resultUrl.equals("redirect:/voteList"));
+        assertTrue("redirect:/voteList".equals(resultUrl));
     }
 
     @Test

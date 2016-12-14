@@ -71,43 +71,28 @@ public class Movie implements Serializable {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder()
-                .append(movieId)
-                .append(movieTitle)
-                .append(movieYear)
-                .append(movieDirector)
-                .append(movieCountry)
-                .append(pcsInfo)
+        return new HashCodeBuilder().append(movieId).append(movieTitle).append(movieYear).append(movieDirector).append(movieCountry).append(pcsInfo)
                 .toHashCode();
     }
-    
+
     @Override
-    public boolean equals (Object obj){
-        if (obj == null) return false;
-        if (obj == this) return true;       
-        if (obj.getClass() != getClass()) return false;        
-        Movie rhs = (Movie) obj;        
-        return new EqualsBuilder()
-                .append(movieId, rhs.movieId)
-                .append(movieTitle, rhs.movieTitle)
-                .append(movieYear, rhs.movieYear)
-                .append(movieDirector, rhs.movieDirector)
-                .append(movieCountry, rhs.movieCountry)
-                .append(pcsInfo, rhs.pcsInfo)
-                .isEquals();                
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (obj.getClass() != getClass())
+            return false;
+        Movie rhs = (Movie) obj;
+        return new EqualsBuilder().append(movieId, rhs.movieId).append(movieTitle, rhs.movieTitle).append(movieYear, rhs.movieYear)
+                .append(movieDirector, rhs.movieDirector).append(movieCountry, rhs.movieCountry).append(pcsInfo, rhs.pcsInfo).isEquals();
     }
-    
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("movieId", movieId)
-                .append("movieTitle", movieTitle)
-                .append("movieYear", movieYear)
-                .append("movieDirector", movieDirector)
-                .append("movieCountry", movieCountry)
-                .append("pcsInfo", pcsInfo)
-                .toString();
-    }    
+        return new ToStringBuilder(this).append("movieId", movieId).append("movieTitle", movieTitle).append("movieYear", movieYear)
+                .append("movieDirector", movieDirector).append("movieCountry", movieCountry).append("pcsInfo", pcsInfo).toString();
+    }
 
     public String getMovieId() {
         return movieId;
