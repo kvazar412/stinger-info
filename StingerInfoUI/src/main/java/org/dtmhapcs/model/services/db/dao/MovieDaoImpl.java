@@ -46,7 +46,7 @@ public class MovieDaoImpl implements MovieDao {
         for (Object obj : session.createQuery("FROM Movie m").getResultList()) {
             movieList.add((Movie) obj);
         }
-        LOGGER.debug("List of movies are returned from DB");
+        LOGGER.debug("List of movies is returned from DB");
         return movieList;
     }
 

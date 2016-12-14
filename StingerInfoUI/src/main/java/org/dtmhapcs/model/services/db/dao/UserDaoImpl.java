@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao {
         for (Object obj : session.createQuery("FROM User u").getResultList()) {
             userList.add((User) obj);
         }
-        LOGGER.debug("List of users are returned from DB");
+        LOGGER.debug("List of users is returned from DB");
         return userList;
     }
 

@@ -67,7 +67,7 @@ public class CrudController {
 
     @RequestMapping(value = "/deleteMovie/{movieId}", method = RequestMethod.GET)
     public String deleteMovie(@PathVariable("movieId") String movieId) {
-        if (movieId.trim().length() > 1) {
+        if ((movieId != null) && (movieId.trim().length() > 1)) {
             this.dbService.deleteMovie(movieId);
             LOGGER.debug("Processing deleteMovie url for movieId = {}", movieId);
         }
@@ -89,7 +89,11 @@ public class CrudController {
 
     @RequestMapping(value = "/readUser/{userId}", method = RequestMethod.GET)
     public String readUserById(@PathVariable("userId") String userId, Model model) {
-        model.addAttribute("user", this.dbService.readUserById(userId));
+        User resultUser = this.dbService.readUserById(userId);
+        if (resultUser == null) {
+            resultUser = new User();
+        }
+        model.addAttribute("user", resultUser);
         model.addAttribute("userList", this.dbService.readAllUsers());
         LOGGER.debug("Processing readUser url for userId = {}", userId);
         return "userList";
@@ -105,8 +109,10 @@ public class CrudController {
 
     @RequestMapping(value = "/deleteUser/{userId}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("userId") String userId) {
-        this.dbService.deleteUser(userId);
-        LOGGER.debug("Processing deleteUser url for userId = {}", userId);
+        if ((userId != null) && (userId.trim().length() > 1)) {
+            this.dbService.deleteUser(userId);
+            LOGGER.debug("Processing deleteUser url for userId = {}", userId);
+        }
         return "redirect:/userList";
     }
 
@@ -120,8 +126,10 @@ public class CrudController {
 
     @RequestMapping(value = "/deleteVote/{movieId}&{userId}", method = RequestMethod.GET)
     public String deleteVote(@PathVariable("movieId") String movieId, @PathVariable("userId") String userId) {
-        this.dbService.deleteVote(movieId, userId);
-        LOGGER.debug("Processing deleteUser url for movieId = {} and userId = {}", movieId, userId);
+        if ((movieId != null) && (movieId.trim().length() > 1) && (userId != null) && (userId.trim().length() > 1)) {
+            this.dbService.deleteVote(movieId, userId);
+            LOGGER.debug("Processing deleteUser url for movieId = {} and userId = {}", movieId, userId);
+        }
         return "redirect:/voteList";
     }
 }

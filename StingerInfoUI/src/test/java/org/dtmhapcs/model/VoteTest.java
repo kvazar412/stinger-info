@@ -17,31 +17,33 @@ public class VoteTest {
     private Vote otherVote;
 
     @Test
-    public void equalsForBoundaryConditions() {
+    public void testEqualsForBoundaryConditions() {
         assertFalse(vote.equals(null));
         assertTrue(vote.equals(vote));
         assertFalse(vote.equals(new Object()));
     }
 
     @Test
-    public void shouldNotBeEqualWithDefaultMovie() {
+    public void testEqualsReturnsNonEqualForDefaultVote() {
         otherVote = new Vote();
+
         assertFalse(vote.equals(otherVote));
     }
 
     @Test
-    public void shouldNotBeEqualWithNonEqualMovie() {
+    public void testEqualsReturnsNonEqualWithNonEqualVote() {
         otherVote = new Vote(voteId, movie, user, VoteValue.NO);
+
         assertFalse(vote.equals(otherVote));
     }
 
     @Test
-    public void toStringShouldContainMovieId() {
+    public void testToStringContainsMovieId() {
         assertTrue(vote.toString().contains(movie.getMovieId()));
     }
 
     @Test
-    public void toStringShouldContainUserId() {
+    public void testToStringContainsUserId() {
         assertTrue(vote.toString().contains(user.getUserId()));
     }
 }

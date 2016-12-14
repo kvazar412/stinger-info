@@ -4,7 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.validation.ConstraintValidatorContext;
 
@@ -21,20 +21,22 @@ public class EnumValidatorImplTest {
     private ConstraintValidatorContext contextMock;
 
     @Mock
-    private List<String> acceptableValues;
+    private Set<String> acceptableValues;
 
     @InjectMocks
-    private EnumValidatorImpl enumValidatorMock;
+    private EnumValidatorImpl enumValidator;
 
     @Test
-    public void isValidShouldReturnTrueForAcceptableValue() {
+    public void testIsValidReturnsTrueForAcceptableValue() {
         when(acceptableValues.contains("2")).thenReturn(true);
-        assertTrue(enumValidatorMock.isValid("2", contextMock));
+
+        assertTrue(enumValidator.isValid("2", contextMock));
     }
 
     @Test
-    public void isValidShouldReturnFalseForNonAcceptableValue() {
+    public void testIsValidReturnsFalseForNonAcceptableValue() {
         when(acceptableValues.contains("4")).thenReturn(false);
-        assertFalse(enumValidatorMock.isValid("4", contextMock));
+
+        assertFalse(enumValidator.isValid("4", contextMock));
     }
 }

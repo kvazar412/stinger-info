@@ -1,7 +1,8 @@
 package org.dtmhapcs.model.services.validators;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -9,11 +10,11 @@ import javax.validation.ConstraintValidatorContext;
 import org.dtmhapcs.model.services.validators.interfaces.EnumValidator;
 
 public class EnumValidatorImpl implements ConstraintValidator<EnumValidator, String> {
-    private List<String> acceptableValues;
+    private Set<String> acceptableValues;
 
     @Override
     public void initialize(EnumValidator constraintAnnotation) {
-        acceptableValues = Arrays.asList(constraintAnnotation.value());
+        acceptableValues = new HashSet<String>(Arrays.asList(constraintAnnotation.value()));
     }
 
     @Override

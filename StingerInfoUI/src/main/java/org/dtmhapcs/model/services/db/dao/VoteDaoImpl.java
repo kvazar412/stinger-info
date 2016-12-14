@@ -38,7 +38,7 @@ public class VoteDaoImpl implements VoteDao {
         for (Object obj : session.createQuery("FROM Vote v").getResultList()) {
             voteList.add((Vote) obj);
         }
-        LOGGER.debug("Votes {} is returned from DB");
+        LOGGER.debug("List of votes is returned from DB");
         return voteList;
     }
 

@@ -10,38 +10,42 @@ public class MovieTest {
     private Movie movie = new Movie("123456", "Title", 2016, "Director", "Country", PcsInfo.YES);
 
     @Test
-    public void hashCodeShouldBeEqualForEquals() {
+    public void testHashCodeReturnsEqualForEquals() {
         Movie otherMovie = new Movie("123456", "Title", 2016, "Director", "Country", PcsInfo.YES);
+
         assertTrue(movie.hashCode() == otherMovie.hashCode());
     }
 
     @Test
-    public void equalsForBoundaryConditions() {
+    public void testEqualsForBoundaryConditions() {
         assertFalse(movie.equals(null));
         assertTrue(movie.equals(movie));
         assertFalse(movie.equals(new Object()));
     }
 
     @Test
-    public void shouldNotBeEqualWithDefaultMovie() {
+    public void testEqualsReturnsNonEqualForDefaultMovie() {
         Movie otherMovie = new Movie();
+
         assertFalse(movie.equals(otherMovie));
     }
 
     @Test
-    public void shouldNotBeEqualWithNonEqualMovie() {
+    public void testEqualsReturnsNonEqualWithNonEqualMovie() {
         Movie otherMovie = new Movie("123456", "OtherTitle", 2016, "Director", "Country", PcsInfo.YES);
+
         assertFalse(movie.equals(otherMovie));
     }
 
     @Test
-    public void shouldBeEqualWithEqualMovie() {
+    public void testEqualsReturnsEqualForEqualMovie() {
         Movie otherMovie = new Movie("123456", "Title", 2016, "Director", "Country", PcsInfo.YES);
+
         assertTrue(movie.equals(otherMovie));
     }
 
     @Test
-    public void toStringShouldContainMovieId() {
+    public void testToStringContainsMovieId() {
         assertTrue(movie.toString().contains("123456"));
     }
 }
