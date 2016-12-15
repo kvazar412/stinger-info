@@ -372,7 +372,7 @@ public class CrudControllerTest {
 
         resultUrl = crudController.deleteVote(movieId, userIdNotValid);
 
-        assertTrue(resultUrl.equals("redirect:/voteList"));
+        assertTrue("redirect:/voteList".equals(resultUrl));
 
         resultUrl = crudController.deleteVote(movieIdNotValid, userId);
 

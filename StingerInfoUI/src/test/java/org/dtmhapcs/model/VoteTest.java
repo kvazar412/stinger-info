@@ -17,6 +17,13 @@ public class VoteTest {
     private Vote otherVote;
 
     @Test
+    public void testHashCodeReturnsEqualForEquals() {
+        otherVote = new Vote(voteId, movie, user, VoteValue.YES);
+
+        assertTrue(vote.hashCode() == otherVote.hashCode());
+    }
+
+    @Test
     public void testEqualsForBoundaryConditions() {
         assertFalse(vote == null);
         assertTrue(vote.equals(vote));
@@ -35,6 +42,13 @@ public class VoteTest {
         otherVote = new Vote(voteId, movie, user, VoteValue.NO);
 
         assertFalse(vote.equals(otherVote));
+    }
+
+    @Test
+    public void testEqualsReturnsEqualForEqualVote() {
+        otherVote = new Vote(voteId, movie, user, VoteValue.YES);
+
+        assertTrue(vote.equals(otherVote));
     }
 
     @Test

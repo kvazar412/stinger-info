@@ -21,4 +21,8 @@ public class EnumValidatorImpl implements ConstraintValidator<EnumValidator, Str
     public boolean isValid(String value, ConstraintValidatorContext context) {
         return acceptableValues.contains(value);
     }
+
+    public Set<String> getAcceptableValues() {
+        return acceptableValues;
+    }
 }
